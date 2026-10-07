@@ -1,86 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Smart Weather &amp; Travel Dashboard</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkyTrip</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body class="theme-clear">
-  <header class="top">
-    <div class="wrap top-inner">
-      <h1>🧭 Smart Weather &amp; Travel</h1>
-      <form id="searchForm" class="search" autocomplete="off">
-        <input id="q" type="search" placeholder="Search a city (e.g. Chennai, Paris)…" aria-label="City name" required>
-        <button type="submit" class="btn">Search</button>
-        <button type="button" id="locBtn" class="btn ghost" title="Use my location">📍</button>
-        <button type="button" id="unitBtn" class="btn ghost" title="Switch units">°C</button>
-      </form>
+
+<body>
+
+    <div class="container">
+
+        <h1>✈️ SkyTrip</h1>
+        <p class="subtitle">Smart Weather & Travel Planner</p>
+
+        <div class="search-box">
+            <input
+                type="text"
+                id="cityInput"
+                placeholder="Enter city name"
+            >
+
+            <button onclick="checkWeather()">
+                Search
+            </button>
+        </div>
+
+        <p id="error"></p>
+
+        <div id="weatherCard" class="weather-card">
+
+            <h2 id="cityName">Chennai</h2>
+
+            <div class="weather-icon" id="weatherIcon">
+                ☀️
+            </div>
+
+            <h3 id="temperature">32°C</h3>
+
+            <p id="condition">
+                Sunny
+            </p>
+
+            <div class="details">
+
+                <div>
+                    💧
+                    <span id="humidity">65%</span>
+                    <small>Humidity</small>
+                </div>
+
+                <div>
+                    💨
+                    <span id="wind">12 km/h</span>
+                    <small>Wind</small>
+                </div>
+
+                <div>
+                    🌡️
+                    <span id="feels">35°C</span>
+                    <small>Feels Like</small>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="score-card">
+
+            <h2>🎯 Travel Score</h2>
+
+            <div class="score" id="score">
+                90/100
+            </div>
+
+            <p id="advice">
+                Excellent day for travelling!
+            </p>
+
+        </div>
+
+
+        <div class="activities">
+
+            <h2>🌴 Recommended Activities</h2>
+
+            <div class="activity-container">
+
+                <div>
+                    🏖️
+                    <p>Beach</p>
+                    <b id="beach">Excellent</b>
+                </div>
+
+                <div>
+                    📸
+                    <p>Photography</p>
+                    <b id="photo">Excellent</b>
+                </div>
+
+                <div>
+                    🚶
+                    <p>Outdoor</p>
+                    <b id="outdoor">Good</b>
+                </div>
+
+                <div>
+                    🏛️
+                    <p>Sightseeing</p>
+                    <b id="sightseeing">Good</b>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="packing">
+
+            <h2>🎒 Smart Packing List</h2>
+
+            <div id="packingList">
+
+                <span>🕶️ Sunglasses</span>
+                <span>💧 Water Bottle</span>
+                <span>🧴 Sunscreen</span>
+
+            </div>
+
+        </div>
+
     </div>
-  </header>
 
-  <main class="wrap">
-    <div id="status" class="status" role="status" aria-live="polite">Search for a city to begin.</div>
-    <ul id="suggestions" class="suggestions" hidden></ul>
+    <script src="script.js"></script>
 
-    <section id="dash" hidden>
-      <div class="row">
-        <article class="card current">
-          <div class="current-head">
-            <div>
-              <h2 id="place">–</h2>
-              <p id="localTime" class="muted"></p>
-            </div>
-            <button id="saveBtn" class="btn ghost" type="button">☆ Save</button>
-          </div>
-          <div class="current-main">
-            <span id="icon" class="big-icon">☀️</span>
-            <div>
-              <div id="temp" class="big-temp">--</div>
-              <div id="desc" class="muted">–</div>
-            </div>
-          </div>
-          <div id="details" class="details"></div>
-        </article>
-
-        <article class="card score">
-          <h3>Travel score today</h3>
-          <div id="ring" class="ring" style="--pct:0"><span id="scoreNum">0</span></div>
-          <p id="scoreLabel" class="score-label">–</p>
-          <p id="bestDay" class="muted"></p>
-        </article>
-      </div>
-
-      <article class="card">
-        <h3>Next 24 hours</h3>
-        <div id="hourly" class="hourly"></div>
-      </article>
-
-      <article class="card">
-        <h3>7-day forecast &amp; travel score</h3>
-        <div id="daily" class="daily"></div>
-      </article>
-
-      <div class="row">
-        <article class="card">
-          <h3>Smart packing list</h3>
-          <ul id="packing" class="packing"></ul>
-        </article>
-        <article class="card">
-          <h3>Travel advice</h3>
-          <ul id="advice" class="advice"></ul>
-        </article>
-      </div>
-    </section>
-
-    <section class="card" id="favSection">
-      <h3>Saved destinations</h3>
-      <p id="favEmpty" class="muted">Save places to compare their travel scores side by side.</p>
-      <div id="favs" class="favs"></div>
-    </section>
-  </main>
-
-  <footer class="foot">Data by <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a></footer>
-  <script src="script.js"></script>
 </body>
 </html>
